@@ -1,0 +1,16 @@
+<svg width="200" height="60" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon: Abstract Arrow/Person -->
+  <path d="M30 45L45 15L60 45H50L45 35L40 45H30Z" fill="url(#paint0_linear)" stroke="white" stroke-width="2"/>
+  <circle cx="45" cy="12" r="5" fill="#2563EB"/>
+  
+  <!-- Text: Skill2Hire -->
+  <text x="70" y="40" font-family="Poppins, sans-serif" font-weight="bold" font-size="28" fill="#0F172A">Skill<tspan fill="#2563EB">2</tspan>Hire</text>
+  
+  <!-- Gradients -->
+  <defs>
+    <linearGradient id="paint0_linear" x1="30" y1="15" x2="60" y2="45" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2563EB"/>
+      <stop offset="1" stop-color="#F97316"/>
+    </linearGradient>
+  </defs>
+</svg>
