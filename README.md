@@ -45,18 +45,44 @@ The following diagram illustrates how the Resume Analysis feature works:
 
 ```mermaid
 graph TD
-    A[User Uploads Resume (PDF)] -->|Frontend| B(React Client)
-    B -->|API Request| C{Express Server}
-    C -->|Extract Text| D[PDF Parser]
-    D -->|Parsed Text| E[AI Analysis Controller]
-    E -->|Send Prompt| F[Groq API / Gemini]
-    F -->|Analysis JSON| E
-    E -->|JSON Response| B
-    B -->|Display Results| G[User Dashboard]
-    
-    style A fill:#f9f,stroke:#333,stroke-width:2px
-    style F fill:#bbf,stroke:#333,stroke-width:2px
-    style G fill:#bfb,stroke:#333,stroke-width:2px
+    subgraph Client
+        U[User / Admin] -->|Interacts| UI[React Frontend]
+    end
+
+    subgraph Server
+        UI -->|HTTP Requests| API[Express API]
+        API -->|Auth| A[Auth Controller]
+        API -->|Jobs| J[Job Controller]
+        API -->|Resume| R[Resume Controller]
+    end
+
+    subgraph Database
+        A <-->|Read/Write User Data| DB[(MongoDB)]
+        J <-->|Read/Write Job Data| DB
+    end
+
+    subgraph External_Services
+        R -->|Extract Text| P[PDF Parser]
+        R -->|Analyze Text| AI[Groq API / Gemini]
+    end
+
+    %% Flows
+    A -->|Issue JWT| UI
+    J -->|Job Listings| UI
+    P -->|Raw Text| R
+    AI -->|Analysis JSON| R
+    R -->|Feedback & Score| UI
+
+    %% Styling
+    classDef client fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef server fill:#fff3e0,stroke:#e65100,stroke-width:2px;
+    classDef db fill:#e8f5e9,stroke:#1b5e20,stroke-width:2px;
+    classDef ext fill:#f3e5f5,stroke:#4a148c,stroke-width:2px;
+
+    class U,UI client;
+    class API,A,J,R server;
+    class DB db;
+    class P,AI ext;
 ```
 
 ---
